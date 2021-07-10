@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Human dog ages</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      form > div {
+        display: flex;
+        margin-bottom: 1rem;
+        align-items: center;
+      }
+
+      label {
+        width: 100px;
+      }
+
+      input,
+      output {
+        border: 1px solid grey;
+        border-radius: 4px;
+        width: 150px;
+        height: 2rem;
+        padding: 0.5rem;
+      }
+
+      output {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Check in your Age in Dog Years</h1>
+    <form>
+      <div>
+        <!-- "for" use the name of the input -->
+        <label for="humanAge"> Your age: </label>
+        <input id="humanAge" type="number" name="humanAge" />
+      </div>
+      <div>
+        <label for="dogAge"> Dog age: </label>
+        <output name="dogAge" />
+      </div>
+      <div>
+        <button>SUBMIT</button>
+      </div>
+    </form>
+
+    <script>
+      const form = document.querySelector("form");
+      const input = document.querySelector("input");
+      const output = document.querySelector("output");
+
+      function humanAgeToDogAge(number) {
+        return number * 7;
+      }
+
+      function handlerSubmit(event) {
+        event.preventDefault();
+        // const humanAge = event.target.elements.humanAge.valueAsNumber;
+        const humanAge = form.elements.humanAge.valueAsNumber;
+        output.value = !Number.isNaN(humanAge)
+          ? humanAgeToDogAge(humanAge)
+          : "";
+      }
+
+      form.addEventListener("submit", handlerSubmit);
+      // input.addEventListener("change", handlerSubmit);
+      input.addEventListener("blur", handlerSubmit);
+    </script>
+  </body>
+</html>
